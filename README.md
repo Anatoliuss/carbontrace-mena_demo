@@ -10,6 +10,21 @@ A static, UI-only demo of the CarbonTrace MENA SaaS product for investor walkthr
 - Heroicons v2
 - Inter Tight / Inter fonts
 
+## Getting Started
+
+```sh
+pnpm dev
+```
+
+## Deploy
+
+Deploy instantly to [Vercel](https://vercel.com/) – no backend required.
+
+## Features
+- Full click-through journey: Welcome → Upload → Review → Download
+- Dark mode, language toggle, shadcn toasts
+- No backend, no real uploads – all static/mock data
+
 ---
 
 © 2024 CarbonTrace MENA

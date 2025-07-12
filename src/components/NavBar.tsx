@@ -9,8 +9,8 @@ import { useCompany } from "@/lib/company-context";
 const navLinks = [
   { href: "/welcome", label: "Welcome" },
   { href: "/upload", label: "Upload" },
-  { href: "/review", label: "Review" },
-  { href: "/download", label: "Download" },
+  { href: "/reports", label: "Additional Information" },
+  { href: "/review", label: "Review & Download" },
   { href: "/settings", label: "Settings" },
 ];
 

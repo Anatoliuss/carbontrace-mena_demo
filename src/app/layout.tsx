@@ -6,6 +6,8 @@ import "@fontsource/inter-tight/700.css";
 import { CompanyProvider } from "@/lib/company-context";
 import { ToastProvider } from "@/components/ToastProvider";
 import { NavBar } from "@/components/NavBar";
+import { UploadsProvider } from "@/context/UploadsContext";
+import { ToastProvider as UploadsToastProvider } from "@/components/uploads/ToastProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,11 +28,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="bg-slate-50 text-slate-900 font-sans min-h-screen">
-        <CompanyProvider>
-          <ToastProvider />
-          <NavBar />
-          {children}
-        </CompanyProvider>
+        <UploadsProvider>
+          <CompanyProvider>
+            <UploadsToastProvider />
+            <NavBar />
+            {children}
+          </CompanyProvider>
+        </UploadsProvider>
       </body>
     </html>
   );
