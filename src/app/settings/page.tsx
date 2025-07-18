@@ -3,17 +3,9 @@ import * as React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCompany } from "@/lib/company-context";
 
-const factorOptions = [
-  "GHG Protocol",
-  "ISO 14064-1",
-  "DEFRA 2023",
-  "ADNOC Local Factors",
-];
-
 export default function SettingsPage() {
   const { companyName, setCompanyName } = useCompany();
   const [input, setInput] = React.useState(companyName);
-  const [factor, setFactor] = React.useState(factorOptions[0]);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
