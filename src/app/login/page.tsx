@@ -5,17 +5,29 @@ import { useCompany } from "@/lib/company-context";
 import { useRouter } from "next/navigation";
 import { LanguageToggle } from "@/components/LanguageToggle";
 
-export default function WelcomePage() {
+export default function LoginPage() {
   const { setCompanyName } = useCompany();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [greeted, setGreeted] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setCompanyName("Company");
-    setGreeted(true);
+    setIsLoading(true);
+    
+    // Accept any login credentials for now
+    if (email && password) {
+      // Extract company name from email domain or use a default
+      const domain = email.split('@')[1];
+      const companyName = domain ? domain.split('.')[0] : "Company";
+      setCompanyName(companyName);
+      
+      // Simulate a brief loading period
+      setTimeout(() => {
+        router.push("/upload");
+      }, 500);
+    }
   };
 
   return (
@@ -33,6 +45,7 @@ export default function WelcomePage() {
               onChange={e => setEmail(e.target.value)}
               className="border rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
+              disabled={isLoading}
             />
             <input
               type="password"
@@ -41,17 +54,14 @@ export default function WelcomePage() {
               onChange={e => setPassword(e.target.value)}
               className="border rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
+              disabled={isLoading}
             />
-            {greeted && (
-              <div className="text-center text-lg font-semibold text-accent-600 mb-2">
-                Welcome, Company !
-              </div>
-            )}
             <button
               type="submit"
-              className="bg-primary-500 text-white hover:bg-primary-600 rounded px-4 py-2 font-semibold transition"
+              disabled={isLoading}
+              className="bg-primary-500 text-white hover:bg-primary-600 disabled:opacity-50 rounded px-4 py-2 font-semibold transition"
             >
-              {greeted ? "Continue to Upload" : "Login"}
+              {isLoading ? "Logging in..." : "Login"}
             </button>
           </form>
           <div className="flex justify-end items-center mt-6">
@@ -61,4 +71,4 @@ export default function WelcomePage() {
       </Card>
     </div>
   );
-} 
+}
